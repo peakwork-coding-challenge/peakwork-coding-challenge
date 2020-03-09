@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nominatim-resolver
+  labels:
+    app: nominatim-resolver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nominatim-resolver
+  template:
+    metadata:
+      labels:
+        app: nominatim-resolver
+    spec:
+      containers:
+        - name: nominatim-resolver
+          image: gcr.io/sebastian-lauth-270620/nominatim-resolver:1
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /secrets/cloudsql/credentials.json
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials

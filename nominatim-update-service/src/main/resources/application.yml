@@ -1,0 +1,5 @@
+spring.datasource:
+  url: jdbc:postgresql:peakwork
+  username: peakwork
+  password: peakwork
+  hikari.maximum-pool-size: 2
