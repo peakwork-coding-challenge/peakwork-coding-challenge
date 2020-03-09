@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nominatim-save-service
-          image: gcr.io/sebastian-lauth-270620/nominatim-save-service:1
+          image: gcr.io/sebastian-lauth-270621/nominatim-save-service:1
           ports:
             - containerPort: 8080
           volumeMounts:
@@ -30,7 +30,7 @@ spec:
           image: gcr.io/cloudsql-docker/gce-proxy:1.14
           command: [
             "/cloud_sql_proxy",
-            "-instances=sebastian-lauth-270620:europe-west3:peakwork-db=tcp:5432",
+            "-instances=sebastian-lauth-270621:europe-west3:peakwork-db=tcp:5432",
             "-credential_file=/secrets/cloudsql/credentials.json"
           ]
           securityContext:

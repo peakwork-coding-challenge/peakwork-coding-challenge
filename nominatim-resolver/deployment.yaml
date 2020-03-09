@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nominatim-resolver
-          image: gcr.io/sebastian-lauth-270620/nominatim-resolver:1
+          image: gcr.io/sebastian-lauth-270621/nominatim-resolver:1
           ports:
             - containerPort: 8080
           volumeMounts:

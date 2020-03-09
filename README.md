@@ -20,16 +20,16 @@ mvnw verify
 
 ### Create new GCP project (and set as default)
 
-**Note:** If you want to use an existing GCP project instead, you can search & replace the project ID `sebastian-lauth-270620` with your own project ID.
+**Note:** If you want to use an existing GCP project instead, you can search & replace the project ID `sebastian-lauth-270621` with your own project ID.
 
 ```console
-gcloud projects create sebastian-lauth-270620 \
+gcloud projects create sebastian-lauth-270621 \
     --organization=$GCP_ORGANIZATION_ID \
     --set-as-default
 ```
 
 **Important:** billing must be enabled for this newly created project in order for the following commands to work.
-This can be done manually via web UI or by listing available billing accounts (`gcloud alpha billing accounts list`) and then associating the newly created project with a billing account (`gcloud alpha billing projects link sebastian-lauth-270620 --billing-account 0X0X0X-0X0X0X-0X0X0X`). 
+This can be done manually via web UI or by listing available billing accounts (`gcloud alpha billing accounts list`) and then associating the newly created project with a billing account (`gcloud alpha billing projects link sebastian-lauth-270621 --billing-account 0X0X0X-0X0X0X-0X0X0X`). 
 
 ### Enable required services
 ```console
@@ -84,15 +84,15 @@ gcloud container clusters create peakwork-cluster \
 gcloud iam service-accounts create peakwork-sa
 ```
 ```console
-gcloud projects add-iam-policy-binding sebastian-lauth-270620 \
-    --member serviceAccount:peakwork-sa@sebastian-lauth-270620.iam.gserviceaccount.com \
+gcloud projects add-iam-policy-binding sebastian-lauth-270621 \
+    --member serviceAccount:peakwork-sa@sebastian-lauth-270621.iam.gserviceaccount.com \
     --role roles/editor
-gcloud projects add-iam-policy-binding sebastian-lauth-270620 \
-    --member serviceAccount:peakwork-sa@sebastian-lauth-270620.iam.gserviceaccount.com \
+gcloud projects add-iam-policy-binding sebastian-lauth-270621 \
+    --member serviceAccount:peakwork-sa@sebastian-lauth-270621.iam.gserviceaccount.com \
     --role roles/viewer
 ```
 ```console
-gcloud iam service-accounts keys create credentials.json --iam-account peakwork-sa@sebastian-lauth-270620.iam.gserviceaccount.com
+gcloud iam service-accounts keys create credentials.json --iam-account peakwork-sa@sebastian-lauth-270621.iam.gserviceaccount.com
 ```
 ```console
 kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=credentials.json
@@ -103,10 +103,10 @@ kubectl create secret generic cloudsql-instance-credentials --from-file=credenti
 Ensure that the Maven build finished successfully before building Docker images.
 
 ```console
-docker build nominatim-resolver -t gcr.io/sebastian-lauth-270620/nominatim-resolver:1
-docker build nominatim-save-service -t gcr.io/sebastian-lauth-270620/nominatim-save-service:1
-docker build nominatim-query-service -t gcr.io/sebastian-lauth-270620/nominatim-query-service:1
-docker build nominatim-update-service -t gcr.io/sebastian-lauth-270620/nominatim-update-service:1
+docker build nominatim-resolver -t gcr.io/sebastian-lauth-270621/nominatim-resolver:1
+docker build nominatim-save-service -t gcr.io/sebastian-lauth-270621/nominatim-save-service:1
+docker build nominatim-query-service -t gcr.io/sebastian-lauth-270621/nominatim-query-service:1
+docker build nominatim-update-service -t gcr.io/sebastian-lauth-270621/nominatim-update-service:1
 ```
 
 ### Push Docker images to Google Container Registry
@@ -118,10 +118,10 @@ gcloud auth configure-docker
 ```
 
 ```console
-docker push gcr.io/sebastian-lauth-270620/nominatim-resolver:1
-docker push gcr.io/sebastian-lauth-270620/nominatim-save-service:1
-docker push gcr.io/sebastian-lauth-270620/nominatim-query-service:1
-docker push gcr.io/sebastian-lauth-270620/nominatim-update-service:1
+docker push gcr.io/sebastian-lauth-270621/nominatim-resolver:1
+docker push gcr.io/sebastian-lauth-270621/nominatim-save-service:1
+docker push gcr.io/sebastian-lauth-270621/nominatim-query-service:1
+docker push gcr.io/sebastian-lauth-270621/nominatim-update-service:1
 ```
 
 ### Apply Kubernetes deployments
